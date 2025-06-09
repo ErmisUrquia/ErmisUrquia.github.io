@@ -1,0 +1,231 @@
+/* Reset y variables globales */
+:root {
+    --primary-color: #8B0000;
+    --secondary-color: #660000;
+    --text-color: #000000;
+    --accent-color: #FFD700;
+    --background-light: #f5f5f5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos base */
+body {
+    background-color: var(--background-light);
+    color: var(--text-color);
+    font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+
+/* Estilos del encabezado */
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+header h1 {
+    font-size: 2.8em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Estilos de navegación */
+nav {
+    background-color: white;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    list-style: none;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Estilos de los contenedores */
+.containers-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 30px;
+    margin: 20px auto;
+    max-width: 1400px;
+}
+
+.container {
+    flex: 1;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.container h2 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.container p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+/* Estilos de enlaces */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+.website-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 25px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.website-link:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos del pie de página */
+footer {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+/* Diseño responsivo */
+@media (max-width: 968px) {
+    .containers-wrapper {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .container {
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo {
+        width: 100px;
+    }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Efectos adicionales */
+::selection {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.container:nth-child(1) { animation-delay: 0.1s; }
+.container:nth-child(2) { animation-delay: 0.2s; }
+.container:nth-child(3) { animation-delay: 0.3s; }

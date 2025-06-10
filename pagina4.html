@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universidad Kennedy</title>
+    <link rel="stylesheet" href="Reset default styles.css">
+    <style> 
+        body {
+            background-color: #8B0000;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #660000;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 100px;
+            height: auto;
+        }
+
+        nav {
+            background-color: #4d0000;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .containers-wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .container {
+            flex: 1;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            background-color: #660000;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        a {
+            color: white;
+        }
+
+        .website-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #660000;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .website-link:hover {
+            background-color: #4d0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="omagen.JPG" alt"logo universidad" class="logo">
+        <h1>Universidad Kennedy</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="vidauniversitaria5.HTML">Inicio</a></li>
+  
+        </ul>
+    </nav>
+
+    <div class="containers-wrapper">
+        <div class="container" id="historia">
+            <h2>Historia</h2>
+            <p>La Universidad Kennedy fue fundada con el objetivo de brindar educación superior de calidad. A lo largo de los años, ha formado a miles de profesionales en diversas disciplinas, contribuyendo al desarrollo del país y la región.</p>
+        </div>
+
+        <div class="container" id="Vida universitaria">
+            <h2>Vida universitaria</h2>
+            <p>La Universidad Kennedy ofrece una amplia variedad de programas académicos, incluyendo carreras de grado, tecnicaturas y posgrados, en modalidades presencial, virtual y híbrida. Los estudiantes tienen acceso a un aula virtual y tutorías personalizadas durante toda su carrera, así como a bibliotecas especializadas en cada sede.</p>
+        </div>
+
+        <div class="container" id="contacto">
+            <h2>Contacto</h2>
+            <p>Para más información, puedes contactarnos a través de nuestro correo electrónico:</p>
+            <p><a href="mailto:alumnos@kennedy.edu.ar">alumnos@kennedy.edu.ar</a></p>
+            <p>Visita nuestro sitio web oficialhaciendo clic en el boton de contacto en la pagina de inicio.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Desarrollado por Ermis Urquia</p>
+    </footer>
+</body>
+</html>

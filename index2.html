@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Universidad Kennedy</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #002855, #005baa);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-card {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 420px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      color: #002855;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 40px 14px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .form-group .icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #005baa;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover:not(:disabled) {
+      background-color: #003d73;
+    }
+
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+
+    #mensaje {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .error {
+      color: #e74c3c;
+    }
+
+    .success {
+      color: #2ecc71;
+    }
+
+    .hint {
+      color: #555;
+      font-size: 13px;
+      margin-top: 5px;
+      text-align: center;
+    }
+
+    #timer {
+      color: #f39c12;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      animation: zoomIn 0.3s ease-in-out;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content h3 {
+      margin-bottom: 15px;
+      color: #002855;
+    }
+
+    .modal-content p {
+      font-size: 16px;
+      color: #444;
+    }
+
+    .modal-content button {
+      margin-top: 20px;
+      background-color: #005baa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <h2>Universidad Kennedy</h2>
+
+    <div class="form-group">
+      <input type="text" id="username" placeholder="Número de estudiante" maxlength="6" />
+      <span class="icon">👤</span>
+    </div>
+
+    <div class="form-group">
+      <input type="password" id="password" placeholder="Contraseña" />
+      <span class="icon">🔒</span>
+    </div>
+
+    <button id="loginBtn" onclick="verificar()">Ingresar</button>
+
+    <p id="mensaje"></p>
+    <div id="hint" class="hint"></div>
+    <div id="timer"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3>¡Bienvenido!</h3>
+      <p>Accediste correctamente a tu cuenta.</p>
+      <button onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    let intentosFallidos = 0;
+    let bloqueoActivo = false;
+    const usuarioCorrecto = "200706";
+    const contrasenaCorrecta = "Z?2345678";
+
+    function verificar() {
+      if (bloqueoActivo) return;
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const mensaje = document.getElementById('mensaje');
+      const hint = document.getElementById('hint');
+      const soloNumeros = /^\d+$/;
+      const formatoContrasena = /^[A-Z][\?\!\@\#\$\%\&\*][0-9]{7}$/;
+
+      mensaje.textContent = "";
+      mensaje.className = "";
+      hint.textContent = "";
+
+      if (!soloNumeros.test(username)) {
+        mostrarError("Nombre incorrecto: solo se permiten números.", "Ejemplo: 203909");
+        return;
+      }
+
+      if (username !== usuarioCorrecto) {
+        mostrarError("Nombre incorrecto.", "Asegúrese de ingresar el número exacto.");
+        return;
+      }
+
+      if (!formatoContrasena.test(password)) {
+        mostrarError("Contraseña inválida: formato incorrecto.", "Debe comenzar con mayúscula, incluir símbolo especial y tener 7 números. Ej: A#1234567");
+        return;
+      }
+
+      if (password !== contrasenaCorrecta) {
+        mostrarError("Contraseña incorrecta.", "Verifique mayúsculas, símbolos y números.");
+        return;
+      }
+
+      // Éxito
+      document.getElementById('mensaje').textContent = "✅ Acceso concedido.";
+      document.getElementById('mensaje').className = "success";
+      document.getElementById('hint').textContent = "";
+      mostrarModal();
+    }
+
+    function mostrarError(mensajeTexto, pista) {
+      intentosFallidos++;
+      const mensaje = document.getElementById('mensaje');
+      const hint = document.getElementById('hint');
+
+      mensaje.textContent = mensajeTexto;
+      mensaje.className = "error";
+      hint.textContent = pista;
+
+      if (intentosFallidos >= 4) {
+        iniciarBloqueo();
+      }
+    }
+
+    function iniciarBloqueo() {
+      bloqueoActivo = true;
+      const btn = document.getElementById('loginBtn');
+      const timer = document.getElementById('timer');
+      let segundos = 60;
+
+      btn.disabled = true;
+      timer.textContent = `Demasiados intentos. Espere ${segundos} segundos...`;
+
+      const intervalo = setInterval(() => {
+        segundos--;
+        timer.textContent = `Demasiados intentos. Espere ${segundos} segundos...`;
+
+        if (segundos <= 0) {
+          clearInterval(intervalo);
+          bloqueoActivo = false;
+          intentosFallidos = 0;
+          timer.textContent = "";
+          btn.disabled = false;
+        }
+      }, 1000);
+    }
+
+    function mostrarModal() {
+      document.getElementById('modal').style.display = "flex";
+    }
+
+    function cerrarModal() {
+      document.getElementById('modal').style.display = "none";
+      // Aquí podrías redirigir a otra página:
+      // window.location.href = "dashboard.html";
+    }
+     // Detectar la tecla Enter para activar el login
+     document.addEventListener("keydown", function(event) {
+     if (event.key === "Enter") {
+     verificar();
+   }
+   });
+
+  </script>
+</body>
+</html>
